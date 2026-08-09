@@ -2,14 +2,29 @@
 <html lang="en">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Sahur notepad</title>
+        <title>Einkaufsliste</title>
         <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" />
         <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
     </head>
     <body>
-        <h1>Sahur shopping list</h1>
-        <textarea id="note-content">{{ current_text }}</textarea>
-        <button id="save-btn">Save Changes</button>
-        <script src="{{ url_for('static', filename='script.js') }}"></script>
-    </body>
+    <div class="container">
+        <h1>🛒 Shopping List</h1>
+        
+        <form id="add-form">
+            <input type="text" id="item-input" placeholder="z.B.: 2x Milch" required autocomplete="off">
+            <button type="submit">Hinzufügen</button>
+        </form>
+
+        <ul id="shopping-list">
+            {% for item in items|reverse %}
+            <li class="{{ 'completed' if item.done else '' }}" data-id="{{ item.id }}">
+                <span class="item-name" onclick="toggleItem({{ item.id }})">{{ item.name }}</span>
+                <button class="delete-btn" onclick="deleteItem({{ item.id }})">✕</button>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
 </html>
