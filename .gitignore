@@ -1,0 +1,17 @@
+# Python virtual environments
+.venv/
+venv/
+ENV/
+web_app/
+
+# Byte-compiled / optimized files
+__pycache__/
+*.pyc
+*.pyo
+
+# Local database or saved files (optional)
+shared_text.txt
+*.db
+
+# VS Code settings
+.vscode/
